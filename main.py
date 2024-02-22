@@ -20,10 +20,19 @@ def letters_count(letters):
 
 with open(path_to_file) as f:
     file_contents = f.read()
-    print(file_contents)
     words = file_contents.split()
-    print(len(words))
+    print(f"--- Begin report of {path_to_file} ---")
+    print(len(words), " words found in the document")
     dic = string_count(file_contents)
-    print(dic)
+    # I don't wont to show all the words count - useless for now
+    # print(dic)
     let_count = letters_count(file_contents)
-    print(let_count)
+    new_dict = {}
+    for key, value in let_count.items():
+        if key.isalpha():
+            new_dict[key] = value
+    sorted_dic = dict(sorted(new_dict.items(), key=lambda item: item[1], reverse=True))
+    for key, value in sorted_dic.items():
+        print(f"The '{key} character was found {value} times")
+    # print(let_count)
+    print("--- End report ---")
